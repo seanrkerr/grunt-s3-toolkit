@@ -1,0 +1,16 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "CreateBucketPolicy",
+			"Effect": "Allow",
+			"Principal": {"AWS": ["arn:aws:iam::111122223333:root","arn:aws:iam::444455556666:root"]},
+			"Action": [
+				"s3:CreateBucket"
+			],
+			"Resource": [
+				"*"
+			]
+		}
+	]
+}

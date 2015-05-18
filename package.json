@@ -1,0 +1,8 @@
+{
+  "name": "s3Deploy",
+  "version": "0.1.0",
+  "devDependencies": {
+    "aws-sdk": "^2.1.20",
+    "grunt": "~0.4.5"
+  }
+}
