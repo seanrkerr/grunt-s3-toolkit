@@ -3,3 +3,4 @@ templates
 grunt-aws.json
 .idea
 .DS_Store
+node_modules
