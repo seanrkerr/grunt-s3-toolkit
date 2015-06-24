@@ -1,10 +1,14 @@
 
 var args = process.argv.slice(2);
 
-var bucketName = args[1];
+var bucketName = args[0];
 
 var createBucket = function (bucketName) {
 
+	if (bucketName.length <= 2) {
+		console.log('the bucket[' + bucketName + '] is too short');
+		return;
+	}
 
     var fs = require('fs');
 
@@ -20,12 +24,7 @@ var createBucket = function (bucketName) {
 		} else {
 			console.log('created the bucket[' + bucketName + ']');
 		}
-
     });
-
-	//command syntax: node S3CreateBucket.js createBucket < bucket name >
-
-
 };
 
 createBucket(bucketName); //call the create bucket function
