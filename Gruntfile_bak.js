@@ -118,3 +118,87 @@ grunt.loadNpmTasks('grunt-contrib-watch');
 grunt.loadNpmTasks('grunt-concurrent');
 
 grunt.registerTask('default', ['concurrent:dev']);*/
+
+/*
+*
+*
+* // Gruntfile.js
+ module.exports = function(grunt) {
+ grunt.registerTask('list', function () {
+ var done = this.async();
+ grunt.util.spawn({ cmd: 'node', args: ['S3ListBuckets.js'], opts: {stdio: 'inherit'}}, function(e, result) {
+ grunt.log.writeln('List created');
+ done();
+ });
+ });
+
+ /*grunt.registerTask('createBucket', function () {
+ var done = this.async();
+ grunt.util.spawn({ cmd: 'node', args: ['S3ListBuckets.js'], opts: {stdio: 'inherit'}}, function(e, result) {
+ grunt.log.writeln('List created');
+ done();
+ });
+ });*/
+
+grunt.registerTask('default', 'Say hello!', function() {
+    askQuestion(this.async());
+
+});
+
+grunt.registerTask('create', function (n) {
+
+    if (n == null) {
+        grunt.log.warn('Post name must be specified, like makePost:PostNameGoesHere.');
+    }
+
+    var done = this.async();
+    grunt.util.spawn({ cmd: 'node', args: ['S3CreateBucket.js', n], opts: {stdio: 'inherit'}}, function() {
+        done();
+    });
+});
+
+
+
+grunt.registerTask('set_global', 'Set a global var.', function(name, val) {
+    global[name] = val;
+});
+
+grunt.registerTask('set_config', 'Set a config property.', function(name, val) {
+    grunt.config.set(name, val);
+});
+
+grunt.registerTask('my_build', 'Run all my build tasks.', function(n) {
+    if (n == null) {
+        grunt.warn('build num must be specified.');
+    }
+    grunt.task.run('foo:' + n + ' bar:' + n + ' baz:' + n);
+});
+
+
+};
+
+function askQuestion(done,grunt) {
+    var readline = require('readline');
+
+    process.stdin.resume();
+    var rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+
+    rl.question('What do you think of node.js? ', function(test) {
+
+        console.log('Thank you for your valuable feedback:', test);
+
+        grunt.task.run('create');
+
+
+        // var done = this.async();
+
+        //rl.close();
+        //done();
+    });
+}
+
+*
+* */
